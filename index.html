@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>z/OS TSO/E Command Reference</title>
+    <style>
+        :root {
+            --ibm-blue: #0f62fe;
+            --dark-blue: #0043ce;
+            --light-gray: #f4f4f4;
+            --medium-gray: #e0e0e0;
+            --dark-gray: #525252;
+            --white: #ffffff;
+            --black: #161616;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background-color: var(--white);
+        }
+
+        header {
+            background-color: var(--ibm-blue);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--dark-blue);
+            border-bottom: 2px solid var(--ibm-blue);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin: 1.25rem 0 0.75rem;
+            color: var(--dark-blue);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        nav {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+
+        .nav-title {
+            font-weight: bold;
+            margin-bottom: 0.75rem;
+            color: var(--dark-gray);
+        }
+
+        .nav-list {
+            list-style: none;
+            border-left: 3px solid var(--ibm-blue);
+            padding-left: 1rem;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-gray);
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--ibm-blue);
+        }
+
+        .main-content {
+            background-color: var(--white);
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+
+        .notice {
+            background-color: var(--light-gray);
+            border-left: 4px solid var(--ibm-blue);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .code-block {
+            background-color: var(--light-gray);
+            font-family: 'Courier New', Courier, monospace;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        .page-info {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            margin: 1rem 0;
+            text-align: right;
+        }
+
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                position: static;
+            }
+
+            .nav-list {
+                border-left: none;
+                padding-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>z/OS</h1>
+            <div class="subtitle">Version 2 Release 4 - TSO/E Command Reference</div>
+            <div class="subtitle">IBM SA32-0975-40</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <nav>
+                <div class="nav-title">Table of Contents</div>
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#notice" class="nav-link">Notices</a></li>
+                    <li class="nav-item"><a href="#contents" class="nav-link">Contents</a></li>
+                    <li class="nav-item"><a href="#chapter1" class="nav-link">Chapter 1. TSO/E Commands</a></li>
+                    <li class="nav-item"><a href="#allocate" class="nav-link">ALLOCATE Command</a></li>
+                    <li class="nav-item"><a href="#altlib" class="nav-link">ALTLIB Command</a></li>
+                    <li class="nav-item"><a href="#attrib" class="nav-link">ATTRIB Command</a></li>
+                </ul>
+            </nav>
+
+            <main class="main-content">
+                <section id="notice" class="notice">
+                    <p><strong>Note:</strong> Before using this information and the product it supports, read the information in "Notices" on page 397.</p>
+                    <p>This edition applies to Version 2 Release 4 of z/OS (5650-ZOS) and to all subsequent releases and modifications until otherwise indicated in new editions.</p>
+                    <p>Last updated: 2019-07-10</p>
+                    <p>© Copyright International Business Machines Corporation 1988, 2019.</p>
+                    <p>US Government Users Restricted Rights – Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.</p>
+                </section>
+
+                <section id="contents">
+                    <h2>Contents</h2>
+                    <ul>
+                        <li>Figures............................................................................................................... xiii</li>
+                        <li>Tables..................................................................................................................xv</li>
+                        <li>About this document...........................................................................................xix</li>
+                        <li>Who should use this document.................................................................................................................xix</li>
+                        <li>How this document is organized............................................................................................................... xix</li>
+                        <li>Where to find more information................................................................................................................ xix</li>
+                        <li>How to read syntax diagrams.....................................................................................................................xx</li>
+                        <li>Symbols.................................................................................................................................................xx</li>
+                        <li>Syntax items..........................................................................................................................................xx</li>
+                        <li>Syntax examples.................................................................................................................................. xxi</li>
+                        <li>How to send your comments to IBM................................................................... xxiii</li>
+                        <li>If you have a technical problem.............................................................................................................. xxiii</li>
+                        <li>Summary of changes.......................................................................................... xxv</li>
+                        <li>Summary of changes for z/OS Version 2 Release 4 (V2R4).................................................................... xxv</li>
+                        <li>Summary of changes for z/OS Version 2 Release 3 (V2R3).................................................................... xxv</li>
+                        <li>Summary of changes for z/OS Version 2 Release 2 (V2R2)................................................................... xxvi</li>
+                    </ul>
+                </section>
+
+                <section id="chapter1">
+                    <h2>Chapter 1. TSO/E commands and subcommands</h2>
+                    <p>Using a TSO/E command............................................................................................................................. 1</p>
+                    <p>Positional operands................................................................................................................................1</p>
+                    <p>Keyword operands..................................................................................................................................1</p>
+                    <p>How to read the TSO/E command syntax....................................................................................................2</p>
+                    <p>Abbreviating keyword operands............................................................................................................ 3</p>
+                    <p>Comments...............................................................................................................................................4</p>
+                    <p>Line continuation.................................................................................................................................... 4</p>
+                    <p>Delimiters................................................................................................................................................5</p>
+                    <p>Using the HELP command............................................................................................................................5</p>
+                    <p>Explanations of commands.................................................................................................................... 5</p>
+                    <p>Syntax interpretation of HELP information............................................................................................ 6</p>
+                    <p>Explanations of subcommands.............................................................................................................. 6</p>
+                    <p>Using commands for VSAM and Non-VSAM data sets................................................................................ 6</p>
+                    <p>TSO/E commands and subcommands........................................................................................................ 7</p>
+                    <p>Summary of TSO/E commands....................................................................................................................7</p>
+                </section>
+
+                <section id="allocate">
+                    <h3>ALLOCATE command</h3>
+                    <p>Data sets with SMS................................................................................................................................. 9</p>
+                    <p>Allocating non-SMS-managed data sets............................................................................................. 10</p>
+                    <p>Allocating z/OS UNIX data sets............................................................................................................10</p>
+                    <p>Determining the SYSOUT class............................................................................................................ 10</p>
+                    <p>ALLOCATE command syntax................................................................................................................ 11</p>
+                    <p>ALLOCATE command operands........................................................................................................... 16</p>
+                    <p>ALLOCATE command return codes...................................................................................................... 41</p>
+                    <p>ALLOCATE command examples........................................................................................................... 41</p>
+                </section>
+
+                <section id="altlib">
+                    <h3>ALTLIB command</h3>
+                    <p>Search order for libraries..................................................................................................................... 47</p>
+                    <p>Using ALTLIB with most applications.................................................................................................. 48</p>
+                    <p>Using ALTLIB with concurrent applications.........................................................................................48</p>
+                    <p>Using ALTLIB in ISPF............................................................................................................................48</p>
+                    <p>Using ALTLIB in the IPCS dialog.......................................................................................................... 49</p>
+                    <p>Stacking Application-Level library requests........................................................................................49</p>
+                    <p>ALTLIB command syntax......................................................................................................................50</p>
+                    <p>ALTLIB command operands.................................................................................................................51</p>
+                    <p>ALTLIB command return codes........................................................................................................... 53</p>
+                    <p>ALTLIB command examples................................................................................................................ 53</p>
+                </section>
+
+                <section id="attrib">
+                    <h3>ATTRIB command</h3>
+                    <p>ATTRIB command syntax......................................................................................................................53</p>
+                    <!-- Additional content would go here -->
+                </section>
+
+                <div class="page-info">Page iii</div>
+            </main>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© Copyright International Business Machines Corporation 1988, 2019. All rights reserved.</p>
+            <p>US Government Users Restricted Rights – Use, duplication or disclosure restricted by GSA ADP Schedule Contract with IBM Corp.</p>
+        </div>
+    </footer>
+</body>
+</html>
